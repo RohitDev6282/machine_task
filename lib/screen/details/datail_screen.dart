@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import "package:flutter/material.dart";
 import 'package:machine_task/constant.dart';
 import 'package:machine_task/models/gallery_modal.dart';
+import 'package:machine_task/screen/details/home/home_screen.dart';
 
 // ignore: must_be_immutable
 class DetailScreen extends StatelessWidget {
@@ -131,7 +132,25 @@ class DetailScreen extends StatelessWidget {
                           children: <Widget>[
                             IconButton(
                                 onPressed: () {
-                                  Navigator.pop(context);
+                                  Navigator.push(
+                                      context,
+                                      PageRouteBuilder(
+                                          transitionDuration:
+                                            const  Duration(seconds: 2),
+                                          transitionsBuilder: (context, animation,
+                                              animationTime, child) {
+                                            animation = CurvedAnimation(
+                                                parent: animation,
+                                                curve: Curves.elasticInOut);
+                                            return ScaleTransition(
+                                              alignment: Alignment.center,
+                                              scale: animation,
+                                              child: child,
+                                            );
+                                          },
+                                          pageBuilder: (context, animation,
+                                                  animationTime) =>
+                                             const HomePage()));
                                 },
                                 icon: const Icon(Icons.remove,),),
                                Padding(
